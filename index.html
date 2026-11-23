@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>UMAKO | 紹介アイテム一覧</title>
+<meta name="description" content="UMAKOの投稿で紹介した韓国コスメ・美容アイテムの一覧。番号や商品名で検索できます。">
+<meta property="og:title" content="UMAKO | 紹介アイテム一覧">
+<meta property="og:description" content="投稿で紹介したアイテムはここから">
+<meta property="og:image" content="https://j888888j.github.io/umako/profile.jpg">
+<meta name="theme-color" content="#f3ede7">
+<link rel="preload" as="image" href="profile.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;1,6..96,400&family=Montserrat:wght@500;600&family=Zen+Maru+Gothic:wght@400;500;700&family=Noto+Sans+JP:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root{--wine:#6B0F1A;--paper:#f3ede7;--card:#fbf8f5;--ink:#1a1414;--mute:#857a76;--rule:#d6cac3}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--paper);color:var(--ink)}
+  body{font-family:"Zen Maru Gothic","Hiragino Maru Gothic ProN",sans-serif;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:480px;margin:0 auto}
+  .sans{font-family:Montserrat,sans-serif;text-transform:uppercase;letter-spacing:.3em;font-size:9.5px;font-weight:600}
+
+  /* ── 표지 (짧게) ── */
+  .cover{position:relative;height:min(66svh,540px);min-height:470px;overflow:hidden;color:#fff}
+  .cover>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:58% 24%}
+  .cover::after{content:"";position:absolute;inset:0;
+    background:linear-gradient(to bottom,rgba(20,8,10,.30),rgba(20,8,10,0) 30%,rgba(20,8,10,0) 45%,rgba(20,8,10,.78) 100%)}
+  .cover>*{position:relative;z-index:2}
+  .meta{display:flex;justify-content:space-between;align-items:center;padding:16px 20px 0}
+  .sns{display:flex;gap:16px}
+  .sns a{color:#fff;display:block}
+  .sns svg{width:17px;height:17px;display:block}
+  .mast{font-family:"Bodoni Moda",serif;font-weight:700;font-size:min(24vw,112px);line-height:.9;text-align:center;margin-top:8px}
+  .lines{position:absolute;left:20px;bottom:26px}
+  .lines .k{font-family:"Bodoni Moda",serif;font-style:italic;font-size:17px;line-height:1.25}
+  .lines h1{font-family:"Hiragino Sans","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;font-weight:700;font-size:19px;line-height:1.6;margin-top:6px}
+  .lines h1 mark{background:var(--wine);color:#fff;padding:.06em .25em}
+
+  .cover>.dialbox{position:absolute;z-index:3;right:10px;bottom:14px;width:164px;aspect-ratio:1;container-type:inline-size;filter:drop-shadow(0 8px 10px rgba(0,0,0,.5))}
+  .dialbox>img{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+  .rot{position:absolute;inset:0;transform:rotate(var(--r,0deg));transition:transform var(--d,0s) cubic-bezier(.45,.05,.3,1)}
+  .hole{position:absolute;left:50%;top:50%;width:25.5cqw;height:25.5cqw;margin:-12.75cqw;border-radius:50%;color:var(--ink);
+    transform:rotate(var(--a)) translateX(33.65cqw) rotate(calc(-1*var(--a)));-webkit-tap-highlight-color:transparent}
+  .hole:focus-visible{outline:2px solid var(--wine)}
+  .hole>span{position:absolute;inset:0;display:flex;flex-direction:column;gap:1.2cqw;align-items:center;justify-content:center;background:url(dial/hole.webp) center/100% 100%;
+    transform:rotate(calc(-1*var(--r,0deg)));transition:transform var(--d,0s) cubic-bezier(.45,.05,.3,1)}
+  .hole{text-decoration:none}
+  .hole svg{width:11.5cqw;height:11.5cqw}
+  .hole.hit svg{transform:scale(.9)}
+  .plateTxt{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+  @media (prefers-reduced-motion:reduce){.rot,.hole>span{transition:none}}
+
+  .plateTxt text{font:italic 400 34px "Bodoni Moda",serif;fill:var(--wine)}
+
+  /* ── 검색 (스크롤해도 위에 붙어 있음) ── */
+  .finder{position:sticky;top:0;z-index:10;background:var(--paper);padding:12px 20px 10px;border-bottom:1px solid var(--rule)}
+  .finder .head{margin-top:14px;display:flex;align-items:baseline;justify-content:space-between}
+  .finder h2{font-family:"Bodoni Moda",serif;font-weight:400;font-size:32px;line-height:1}
+  .finder .count{color:var(--mute)}
+  .search{display:flex;align-items:center;gap:10px;background:#fff;border:1.5px solid var(--ink);border-radius:14px;padding:0 14px;height:52px}
+  .search svg{width:18px;height:18px;flex:none}
+  .search input{flex:1;border:0;background:transparent;font:500 16px "Zen Maru Gothic",sans-serif;color:var(--ink);outline:none;min-width:0}
+  .search input::placeholder{color:#a99d98}
+  .search input::-webkit-search-cancel-button{display:none}
+  .search button{border:0;background:none;font-size:20px;color:var(--mute);cursor:pointer;display:none}
+  .search.has button{display:block}
+  .chips{display:flex;gap:8px;overflow-x:auto;margin-top:8px;scrollbar-width:none}
+  .chips::-webkit-scrollbar{display:none}
+  .chip{flex:none;border:1px solid var(--ink);background:transparent;color:var(--ink);padding:7px 14px;border-radius:999px;
+    font:500 12.5px "Zen Maru Gothic",sans-serif;cursor:pointer}
+  .chip.on{background:var(--ink);color:var(--paper)}
+
+  .tabs{display:flex;gap:22px;margin-top:4px}
+  .tab{border:0;background:none;padding:0 0 6px;font-family:"Bodoni Moda",serif;font-size:24px;color:#8f8688;cursor:pointer;border-bottom:1.5px solid transparent;line-height:1}
+  .tab.on{color:var(--ink);border-bottom-color:var(--ink)}
+  .tip a{display:grid;grid-template-columns:56px 1fr 18px;gap:12px;align-items:center;padding:18px 0;border-bottom:1px solid var(--rule);text-decoration:none;color:var(--ink)}
+  .tip .tno{font-family:"Bodoni Moda",serif;font-size:30px;line-height:1;color:var(--wine)}
+  .tip .meta2{font-family:Montserrat,sans-serif;font-size:10px;font-weight:600;letter-spacing:.18em;color:var(--mute)}
+  .tip .ttl{display:block;font-family:"Noto Sans JP","Hiragino Sans",sans-serif;font-weight:700;font-size:15.5px;line-height:1.5;margin-top:4px}
+  .group{list-style:none;font-family:Montserrat,sans-serif;font-size:10px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;
+    color:var(--wine);padding:22px 0 4px;border-bottom:1px solid var(--ink)}
+  .group span{color:var(--mute);margin-left:8px}
+  .hint:empty{display:none}
+  .hint{padding:14px 20px 0;font-size:12.5px;color:var(--mute);line-height:1.8}
+
+  /* ── 상품 목록 ── */
+  .items{list-style:none;padding:4px 20px 0}
+  .item a{display:grid;grid-template-columns:72px 1fr auto;gap:14px;align-items:center;padding:9px 0;border-bottom:1px solid var(--rule);text-decoration:none;color:var(--ink)}
+  .thumb{width:72px;height:72px;border-radius:8px;overflow:hidden;background:#fff}
+  .thumb img{width:100%;height:100%;object-fit:contain;display:block}
+  .no{font:400 17px/1 "Bodoni Moda",serif;color:var(--wine);margin-right:8px;letter-spacing:0}
+  .brand{display:block;font:600 9.5px/1.3 Montserrat,"Noto Sans JP",sans-serif;letter-spacing:.08em;color:var(--mute)}
+  .name{display:block;font:700 13.5px/1.4 "Noto Sans JP","Hiragino Sans",sans-serif;margin-top:2px}
+  .go{display:flex;align-items:center;gap:7px;font:500 11px/1 "Zen Maru Gothic",sans-serif;color:var(--mute);white-space:nowrap}
+  .arr{font-family:"Bodoni Moda",serif;font-size:16px;color:var(--ink)}
+  .empty{padding:40px 20px;text-align:center;color:var(--mute);font-size:14px;line-height:1.9;display:none}
+  .empty.show{display:block}
+
+  footer{margin:40px 20px 0;padding:0 0 34px}
+  footer .row{display:flex;justify-content:space-between;align-items:center}
+  footer a{color:var(--ink);font-size:12px}
+  footer .biz{display:block;background:var(--wine);color:#fff;text-decoration:none;text-align:center;padding:24px 16px;border-radius:14px}
+  .biz b{display:block;font:700 18px "Hiragino Sans","Noto Sans JP",sans-serif;margin-top:10px}
+  .biz .mail{display:inline-flex;align-items:center;gap:8px;margin-top:12px;font:500 14px Montserrat,sans-serif}
+  .biz .mail{user-select:all;-webkit-user-select:all}
+  footer .note{font-size:11px;color:var(--mute);line-height:1.8;margin-top:12px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="cover">
+    <img src="profile.jpg" alt="UMAKO" width="900" height="900" fetchpriority="high">
+    <div class="meta"><span class="sans">Korean Beauty Edit</span></div>
+    <div class="mast">UMAKO</div>
+    <div class="lines">
+      <p class="k">The beauty secrets<br>of Korean women</p>
+      <h1>韓国人が伝える<br><mark>K-BEAUTY</mark>の裏話</h1>
+    </div>
+  <nav class="dialbox" aria-label="メニュー">
+      <img src="dial/plate.webp" alt="">
+      <div class="rot" id="dial"></div>
+      <svg class="plateTxt" viewBox="0 0 350 350" aria-hidden="true"><text x="175" y="172" text-anchor="middle">Beauty</text><text x="175" y="206" text-anchor="middle">Links</text></svg>
+      <img src="dial/stop.webp" alt="">
+    </nav>
+  </section>
+
+  <section class="finder" id="finder">
+    <label class="search" id="searchBox">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input id="q" type="search" inputmode="search" enterkeyhint="search" autocomplete="off"
+             placeholder="番号・商品名・ブランドで検索" aria-label="検索">
+      <button type="button" id="clear" aria-label="クリア">×</button>
+    </label>
+    <div class="head"><div class="tabs"><button class="tab on" data-v="shop">Shop</button><button class="tab" data-v="tips">Tips</button></div><span class="count sans" id="count"></span></div>
+    <div class="chips" id="chips"></div>
+  </section>
+
+  <p class="hint" id="hint"></p>
+
+  <ul class="items" id="items"></ul>
+  <p class="empty" id="empty">見つかりませんでした。<br>別のことばや番号で探してみてください。</p>
+
+  <footer>
+    <div class="biz" id="biz">
+      <span class="sans">Business</span>
+      <b>お仕事のご依頼はこちら</b>
+      <span class="mail" id="mail">biz_japan@doohocorp.com</span>
+    </div>
+    <p class="note">※当ページのリンクには広告（アフィリエイト）を含みます。</p>
+  </footer>
+</div>
+
+<script>
+/* SNS 아이콘 (선 아이콘, 간단하게) */
+const SNS = [
+  { id:"sns_youtube",   label:"YouTube",   url:"https://www.youtube.com/@umaikorea",
+    svg:'<rect x="2" y="5" width="20" height="14" rx="4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 9.2v5.6l4.8-2.8z" fill="currentColor"/>' },
+  { id:"sns_instagram", label:"Instagram", url:"https://www.instagram.com/umaikorea/",
+    svg:'<rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor"/>' },
+  { id:"sns_tiktok",    label:"TikTok",    url:"https://www.tiktok.com/@umaikorea",
+    svg:'<path d="M14 3v11.5a3.5 3.5 0 1 1-3-3.46M14 3c.4 2.6 2.2 4.3 5 4.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>' },
+];
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+/* 다이얼: 구멍을 누르면 손가락 멈춤쇠까지 돌아간 뒤 그곳으로 간다. go 는 페이지 안, url 은 밖 */
+const G = (bg, p) => `<rect width="24" height="24" rx="6" fill="${bg}"/>${p}`;
+const st = 'fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"';
+const SNSI = {
+  sns_instagram: '<defs><linearGradient id="ig" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#f9b233"/><stop offset=".45" stop-color="#e1306c"/><stop offset="1" stop-color="#7b35c9"/></linearGradient></defs>' + G("url(#ig)", `<rect x="5.500" y="5.500" width="13" height="13" rx="4" ${st}/><circle cx="12" cy="12" r="3.200" ${st}/><circle cx="15.700" cy="8.300" r=".9" fill="#fff"/>`),
+  sns_youtube: '<rect y="3.500" width="24" height="17" rx="5" fill="#e3211c"/><path d="M9.800 8.500v7l6-3.500z" fill="#fff"/>',
+  sns_tiktok: G("#141214", `<path d="M13 5v9.500a2.800 2.800 0 1 1-2.400-2.770M13 5c.3 2.100 1.800 3.500 4 3.700" ${st}/>`),
+};
+const DIAL = [
+  ...["sns_instagram","sns_youtube","sns_tiktok"].map(id => ({ ...SNS.find(x => x.id === id), svg: SNSI[id] })),
+  { id:"contact", label:"お仕事のご依頼（メール）", biz:true, svg:G("#1a1414", `<rect x="5" y="7" width="14" height="10" rx="1.500" ${st}/><path d="m5.500 8 6.500 5 6.500-5" ${st}/>`) },
+  { id:"shop", label:"Shop 紹介アイテム", go:["shop",""], svg:G("#6B0F1A", `<path d="M6.500 9h11l.8 9H5.700zM9.300 9V8a2.700 2.700 0 0 1 5.400 0v1" ${st}/>`) },
+  { id:"tips", label:"Tips 美容のコツ", go:["tips",""], svg:G("#6B0F1A", `<path d="M9.600 15.200c0-1.500-2.600-2.700-2.600-5.600a5 5 0 0 1 10 0c0 2.900-2.600 4.100-2.600 5.600zM9.900 17.700h4.200M10.800 20h2.400" ${st}/>`) },
+];
+const STOP = 3, dial = $("dial"), still = matchMedia("(prefers-reduced-motion:reduce)");
+let busy = false;
+const ang = i => -35 - i * 50;
+dial.innerHTML = DIAL.map((h, i) => `<a class="hole" href="${h.url ? esc(h.url) : "#finder"}" data-i="${i}" data-id="${h.id}" aria-label="${h.label}" style="--a:${ang(i)}deg"><span><svg viewBox="0 0 24 24" aria-hidden="true">${h.svg}</svg></span></a>`).join("");
+const spin = (r, ms) => { dial.style.setProperty("--d", (still.matches ? 0 : ms) + "ms"); dial.style.setProperty("--r", r + "deg"); };
+function arrive(h) {
+  if (h.url) { location.href = h.url; return; }
+  if (h.biz) { $("biz").scrollIntoView({ block: "center" }); return; }
+  $("q").value = q = ""; setView(h.go[0]); if (h.go[1]) setCat(h.go[1]);
+  history.replaceState(null, "", location.pathname);
+  if (h.go[2]) $("q").focus({ preventScroll: true });
+  toList();
+}
+const onPick = e => {
+  const t = e.target.closest("a[data-i]"), a = t && dial.children[t.dataset.i];
+  if (!a || e.metaKey || e.ctrlKey || e.shiftKey) return;
+  e.preventDefault();
+  if (busy) return;
+  busy = true; clearTimeout(intro);
+  const i = +a.dataset.i, r = STOP - ang(i), ms = 350 + r * 1.6;
+  a.classList.add("hit"); spin(r, ms);
+  setTimeout(() => { arrive(DIAL[i]); spin(0, ms * 1.2);
+    setTimeout(() => { a.classList.remove("hit"); busy = false; }, still.matches ? 0 : ms * 1.2);
+  }, still.matches ? 0 : ms + 80);
+};
+dial.addEventListener("click", onPick);
+/* 처음 한 번만 살짝 돌았다 돌아와서 누를 수 있는 다이얼임을 알린다 */
+const intro = setTimeout(() => { if (!busy) { spin(48, 800); setTimeout(() => { if (!busy) spin(0, 900); }, 850); } }, 700);
+addEventListener("pageshow", e => { if (e.persisted) { busy = false; spin(0, 0); document.querySelectorAll(".hit").forEach(x => x.classList.remove("hit")); } });
+
+/* 검색: 전각/반각, 대소문자, 가타카나/히라가나를 같은 것으로 본다 */
+const norm = s => String(s ?? "").normalize("NFKC").toLowerCase()
+  .replace(/[ァ-ヶ]/g, c => String.fromCharCode(c.charCodeAt(0) - 0x60)).replace(/\s+/g, "");
+
+let DATA = { categories: [], items: [], tips: [] }, cat = "", q = "", view = "shop";
+const HINT = { shop: "", tips: "" };
+const PH = { shop: "投稿の番号・商品名を入力", tips: "キーワードを入力（例：かっさ）" };
+
+function render() {
+  const words = q.split(/\s+/).map(norm).filter(Boolean);
+  const items = DATA.items.filter(it => (!cat || view !== "shop" || it.cat === cat) &&
+    words.every(w => norm([it.no, Number(it.no), it.brand, it.name, it.cat, it.post, it.shop, ...(it.tags || [])].join(" ")).includes(w)));
+  const tips = (DATA.tips || []).filter(t => (!cat || view !== "tips" || t.cat === cat) &&
+    words.every(w => norm([t.no, t.title, t.cat, t.kind, ...(t.tags || [])].join(" ")).includes(w)));
+  // 검색어가 있으면 상품·꿀팁을 함께 보여준다 (지금 탭 쪽을 위에)
+  let html = "", n = 0;
+  const secs = view === "tips" ? [["tips", tips], ["shop", items]] : [["shop", items], ["tips", tips]];
+  for (const [k, list] of secs) {
+    if (k !== view && !words.length) continue;
+    if (words.length && list.length) html += `<li class="group">${k === "shop" ? "Items" : "Tips"}<span>${list.length}</span></li>`;
+    html += k === "shop" ? list.map(itemHTML).join("") : list.map(tipHTML).join("");
+    n += list.length;
+  }
+  $("items").innerHTML = html;
+  $("empty").classList.toggle("show", n === 0);
+  $("count").textContent = words.length ? `${n} results` : view === "shop" ? `${items.length} items` : `${tips.length} tips`;
+  $("searchBox").classList.toggle("has", !!q);
+}
+
+function itemHTML(it) { return `
+    <li class="item"><a href="${esc(it.url)}" target="_blank" rel="noopener${it.shop ? " sponsored" : ""}" data-id="item-${esc(it.no)}">
+      <span class="thumb">${it.thumb ? `<img src="${esc(it.thumb)}" alt="" loading="lazy" width="240" height="240" onerror="this.remove()">` : ""}</span>
+      <span><span class="brand"><i class="no">${esc(it.no)}</i>${esc(it.brand)}</span><span class="name">${esc(it.name)}</span></span>
+      <span class="go">${it.shop ? esc(it.shop) : "投稿"}<span class="arr">→</span></span></a></li>`; }
+
+function tipHTML(t) { return `
+    <li class="tip"><a href="${esc(t.url)}" target="_blank" rel="noopener" data-id="tip-${esc(t.no)}">
+      <span class="tno">${esc(t.no.replace("T", ""))}</span>
+      <span><span class="meta2">${esc(t.cat)} ・ ${esc(t.kind)}</span><span class="ttl">${esc(t.title)}</span></span>
+      <span class="arr">→</span></a></li>`; }
+
+function drawChips() {
+  const src = view === "tips" ? DATA.tips || [] : DATA.items;
+  const cats = ((view === "tips" ? DATA.tip_categories : DATA.categories) || []).filter(c => src.some(x => x.cat === c)); // 빈 카테고리는 숨김
+  $("chips").innerHTML = ["", ...cats].map(c =>
+    `<button class="chip${c === cat ? " on" : ""}" data-c="${esc(c)}">${c || "すべて"}</button>`).join("");
+}
+
+function setView(v) {
+  view = v; cat = "";
+  document.querySelectorAll(".tab").forEach(b => b.classList.toggle("on", b.dataset.v === v));
+  $("hint").innerHTML = HINT[v]; $("q").placeholder = PH[v];
+  drawChips(); render();
+  if (scrollY > document.querySelector(".cover").offsetHeight) toList();
+}
+document.querySelector(".tabs").addEventListener("click", e => { const b = e.target.closest(".tab"); if (b) setView(b.dataset.v); });
+
+function setCat(c) {
+  cat = c;
+  [...$("chips").children].forEach(b => b.classList.toggle("on", b.dataset.c === c));
+  render();
+}
+
+const toList = () => window.scrollTo(0, document.querySelector(".cover").offsetHeight);
+let tmr;
+$("q").addEventListener("input", e => {
+  q = e.target.value; render(); if (q) toList();
+  clearTimeout(tmr);  // 검색어를 주소에 남겨 공유 가능하게 (?q=003)
+  tmr = setTimeout(() => history.replaceState(null, "", q ? "?q=" + encodeURIComponent(q) : location.pathname), 400);
+});
+$("q").addEventListener("keydown", e => { if (e.key === "Enter") e.target.blur(); });
+$("clear").addEventListener("click", () => { $("q").value = ""; q = ""; render(); history.replaceState(null, "", location.pathname); $("q").focus(); });
+
+fetch("products.json", { cache: "no-cache" }).then(r => r.json()).then(d => {
+  DATA = d;
+  $("chips").addEventListener("click", e => { const b = e.target.closest(".chip"); if (b) setCat(b.dataset.c); });
+  const sp = new URLSearchParams(location.search), p = sp.get("q");
+  if (p) { $("q").value = q = p; }
+  setView(sp.get("v") === "tips" ? "tips" : "shop");
+  if (p) toList();
+});
+
+/* 클릭 수: GoatCounter 계정 만든 뒤 아래 주석의 스크립트 태그를 켜면 상품별로 집계된다 */
+document.addEventListener("click", e => {
+  const a = e.target.closest("a[data-id]");
+  if (a && window.goatcounter && window.goatcounter.count)
+    window.goatcounter.count({ path: "click-" + a.dataset.id, title: a.dataset.id, event: true });
+});
+</script>
+<!-- <script data-goatcounter="https://CODE.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script> -->
+</body>
+</html>
